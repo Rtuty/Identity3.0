@@ -20,8 +20,8 @@ public class SampleContext : DbContext
 
     public List<User> GetUsers()
     {
-        var users = Customer.Select(c => c as User).ToList();
-        users.AddRange(Performer.Select(c => c as User));
+        var users = Customer.ToList().Select(c => c as User).ToList();
+        users.AddRange(Performer.ToList().Select(c => c as User));
         return users;
     }
 }
@@ -44,6 +44,8 @@ public static class Hash
 public class User
 {
     [Required]
+    public int Id { get; set; }
+    
     [MaxLength(150)]
     public string Login { get; set; }
     
